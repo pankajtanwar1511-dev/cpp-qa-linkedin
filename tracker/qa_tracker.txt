@@ -1,0 +1,106 @@
+# LinkedIn C++ Q&A Posting Tracker
+# Track progress for interactive Q&A posts
+#
+# STATUS LEGEND:
+#   [ ] TODO - Not posted yet
+#   [Q] QUESTION POSTED - Question posted, waiting for 1-hour answer
+#   [X] COMPLETE - Both question and answer posted
+#
+# WORKFLOW:
+#   1. Post question (content.txt + question_image.png)
+#   2. Wait 1 hour
+#   3. Comment answer (answer.txt + answer_image.png)
+
+========================================
+QUICK STATS:
+  Total Q&A Posts: 45
+  Completed: 0
+  Question Posted (awaiting answer): 0
+  Remaining: 45
+
+NEXT TO POST: Post 1
+========================================
+
+C++ Q&A POSTS (1-45)
+[ ] Post 1  | Virtual Destructor Memory Leak
+[ ] Post 2  | Range-Based For Loop on Temporary
+[ ] Post 3  | Dangling Reference Bug
+[ ] Post 4  | RAII File Handle Implementation
+[ ] Post 5  | Move Semantics Performance
+[ ] Post 6  | Smart Pointer Cycle Detection
+[ ] Post 7  | Template Specialization Ambiguity
+[ ] Post 8  | Perfect Forwarding with Universal References
+[ ] Post 9  | Copy Elision and RVO
+[ ] Post 10 | Const Correctness Violation
+[ ] Post 11 | Pointer vs Reference for Optional Parameters
+[ ] Post 12 | Virtual Function in Constructor
+[ ] Post 13 | Multiple Inheritance Diamond Problem
+[ ] Post 14 | Static Initialization Order Fiasco
+[ ] Post 15 | Exception Safety Guarantees
+[ ] Post 16 | Thread-Safe Singleton Pattern
+[ ] Post 17 | Lock-Free Programming Pitfall
+[ ] Post 18 | Memory Ordering and Atomics
+[ ] Post 19 | Custom Allocator Design
+[ ] Post 20 | STL Iterator Invalidation
+[ ] Post 21 | Lambda Capture by Reference Danger
+[ ] Post 22 | Type Deduction with auto
+[ ] Post 23 | SFINAE and enable_if Usage
+[ ] Post 24 | Variadic Template Expansion
+[ ] Post 25 | Concept Requirements (C++20)
+[ ] Post 26 | Coroutine Lifetime Management
+[ ] Post 27 | std::optional Misuse
+[ ] Post 28 | std::variant Type Safety
+[ ] Post 29 | std::span Boundary Checking
+[ ] Post 30 | Structured Bindings Edge Case
+[ ] Post 31 | constexpr Function Limitation
+[ ] Post 32 | Class Template Argument Deduction
+[ ] Post 33 | Fold Expressions Gotcha
+[ ] Post 34 | Three-Way Comparison Operator
+[ ] Post 35 | Module Linkage Issue
+[ ] Post 36 | Designated Initializers Order
+[ ] Post 37 | Aggregate Initialization Rules
+[ ] Post 38 | std::array vs C Array Performance
+[ ] Post 39 | std::vector Reserve vs Resize
+[ ] Post 40 | String View Lifetime Problem
+[ ] Post 41 | std::function Overhead
+[ ] Post 42 | Polymorphic Memory Resource
+[ ] Post 43 | Concurrent Queue Implementation
+[ ] Post 44 | Lock-Free Stack Race Condition
+[ ] Post 45 | Cache-Friendly Data Structure
+
+========================================
+HOW TO USE:
+1. Run: python3 automation/qa_poster.py --post-question
+   → Posts next [ ] question, marks as [Q]
+
+2. Wait 1 hour (automated by pending_comments.json)
+
+3. Run: python3 automation/qa_poster.py --post-answers
+   → Posts pending answers, marks [Q] → [X]
+
+OR use auto mode:
+   python3 automation/qa_poster.py --auto
+   → Automatically posts question OR answers based on state
+
+========================================
+FILES REQUIRED FOR EACH POST:
+  Post N requires these 4 files in /home/pankaj/autolinkedin/linkedin_posts_qa/data/:
+  - NN_content.txt          (Question caption for main post)
+  - NN_question_image.png   (Code screenshot/diagram)
+  - NN_answer.txt           (Answer text for comment)
+  - NN_answer_image.png     (Full explanation diagram)
+
+Example for Post 1:
+  - 01_content.txt
+  - 01_question_image.png
+  - 01_answer.txt
+  - 01_answer_image.png
+
+========================================
+POSTING SCHEDULE (RECOMMENDED):
+- Post 1 question per day
+- Answers post automatically after 1 hour
+- Allows audience engagement before revealing answer
+- Can run independently of main PDF posting system
+
+========================================

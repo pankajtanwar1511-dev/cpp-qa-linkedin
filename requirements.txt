@@ -1,0 +1,14 @@
+# LinkedIn C++ Q&A Auto Poster - Dependencies
+
+# LinkedIn API and HTTP requests
+requests>=2.31.0
+
+# Environment variables
+python-dotenv>=1.0.0
+
+# Date/time handling (included in Python 3.10+, but listed for clarity)
+# No additional package needed - uses built-in datetime
+
+# Optional: For local testing and development
+# pytest>=7.4.0
+# black>=23.0.0
