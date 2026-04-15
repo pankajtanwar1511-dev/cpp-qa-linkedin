@@ -1,0 +1,17 @@
+This crashed our production system.
+We had a vector, got an iterator to the first element, then added more elements.
+Later in the code, we dereferenced the iterator. Crash.
+I see this bug in a lot of codebases. It's subtle because it doesn't always crash immediately.
+
+Why does this matter?
+
+• Common STL bug that causes crashes
+• Real production issue
+• Tests understanding of container internals
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #stl #cplusplus

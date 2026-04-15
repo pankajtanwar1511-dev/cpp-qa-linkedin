@@ -1,0 +1,13 @@
+
+Why does this matter?
+
+• Subtle difference with huge impact
+• C++11 type deduction
+• Teaches expression categories
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #decltype #templates

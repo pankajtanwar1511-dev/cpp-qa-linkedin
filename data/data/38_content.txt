@@ -1,0 +1,13 @@
+
+Why does this matter?
+
+• Common constexpr confusion
+• Compile-time vs runtime
+• Modern C++ feature
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #constexpr #compiletime

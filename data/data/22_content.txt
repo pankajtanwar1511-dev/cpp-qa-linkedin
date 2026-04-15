@@ -1,0 +1,16 @@
+Forward lvalue as lvalue. Forward rvalue as rvalue.
+This is perfect forwarding.
+Without std::forward, everything becomes lvalue inside template function (because parameters have names).
+
+Why does this matter?
+
+• Used extensively in STL (emplace, make_shared, etc.)
+• Essential pattern for writing generic template code
+• Advanced move semantics topic
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #templates #perfectforwarding

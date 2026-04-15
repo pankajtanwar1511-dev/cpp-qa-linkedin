@@ -1,0 +1,13 @@
+
+Why does this matter?
+
+• C++20 cutting-edge feature
+• Stricter than constexpr
+• Guarantees zero runtime cost
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #cpp20 #consteval

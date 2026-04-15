@@ -1,0 +1,16 @@
+Struct is 12 bytes. But members total 6 bytes.
+Where's the other 6 bytes?
+I learned this when optimizing cache usage in embedded systems.
+
+Why does this matter?
+
+• Memory layout understanding
+• Performance optimization
+• Cache line efficiency
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #memory #alignment

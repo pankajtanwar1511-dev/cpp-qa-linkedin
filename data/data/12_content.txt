@@ -1,0 +1,17 @@
+My thread isn't modifying the original variable.
+I spent 20 minutes debugging this. Passed a variable to a thread, thread modified it, but original was unchanged.
+I hit this in my autonomous driving code where I wanted a thread to update a shared status variable. Kept passing the value, nothing changed.
+Once I used std::ref(), worked perfectly.
+
+Why does this matter?
+
+• Common thread bug
+• Teaches thread argument semantics
+• std::ref usage
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #multithreading #stdthread

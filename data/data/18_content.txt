@@ -1,0 +1,15 @@
+Tried to remove elements from a vector. Size didn't change.
+I use this pattern all the time now in my ROS 2 code for cleaning up arrays.
+
+Why does this matter?
+
+• Common STL pattern
+• Algorithm composition
+• Efficiency (single pass)
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #stl #algorithms

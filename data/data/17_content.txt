@@ -1,0 +1,13 @@
+
+Why does this matter?
+
+• C++ language design decision for safety
+• Prevents accessing uninitialized memory
+• Common confusion point
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #virtualfunctions #oop

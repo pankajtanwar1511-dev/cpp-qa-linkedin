@@ -1,0 +1,14 @@
+Can't copy threads. Can only move them.
+
+Why does this matter?
+
+• Move semantics application
+• Resource ownership model
+• Thread safety
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #threads #movesemantics

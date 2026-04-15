@@ -1,0 +1,16 @@
+Program just calls std::terminate() and crashes.
+No warning. No error message. Just terminates.
+I hit this when I first started with multithreading in C++. Created a thread, did some work, function exits. Boom.
+
+Why does this matter?
+
+• Most developers hit this at least once
+• Thread lifecycle fundamental
+• Common production crash
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #multithreading #cplusplus

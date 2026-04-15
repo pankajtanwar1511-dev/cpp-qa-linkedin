@@ -1,0 +1,18 @@
+Memory allocated. Constructor throws. Memory leaked.
+Constructor doesn't complete = object doesn't exist = destructor not called.
+But memory was already allocated in member initializer.
+This is a classic RAII pitfall. Resource acquired, then exception, no cleanup.
+I hit this exact bug at Merkur Gaming. Allocated resource, did validation, validation threw, resource leaked.
+
+Why does this matter?
+
+• Exception safety in constructors
+• Solution: Use smart pointers or two-phase construction
+• Real-world leak pattern
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #raii #memoryleak

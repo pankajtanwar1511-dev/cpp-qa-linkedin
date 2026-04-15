@@ -1,0 +1,16 @@
+Double delete crash. Again.
+But this time with smart pointers. I thought smart pointers prevented this?
+I hit this when migrating old code to use smart pointers. Thought I was making it safer. Made it worse.
+
+Why does this matter?
+
+• Common smart pointer bug that crashes at runtime
+• Teaches how control blocks work internally
+• Solution: always use std::make_shared or copy from existing shared_ptr
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #smartpointers #cplusplus

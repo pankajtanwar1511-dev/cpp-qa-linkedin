@@ -1,0 +1,2 @@
+**Output:** Integral: 42, Float: 3.14
+Full explanation in the image below 👇

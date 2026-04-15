@@ -1,0 +1,2 @@
+**Output:** s1: (empty), s2: Hello, s1: World
+Full explanation in the image below 👇

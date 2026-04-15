@@ -1,0 +1,20 @@
+Moved-from object is in valid but unspecified state.
+I learned this when debugging move semantics. Moved-from string was empty, but spec says "unspecified."
+Safe operations on moved-from objects:
+- Assign to it
+- Destroy it
+Unsafe:
+- Access its value
+
+Why does this matter?
+
+• Move semantics safety rules
+• Common confusion point
+• Proper resource management
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #movesemantics #stdstring

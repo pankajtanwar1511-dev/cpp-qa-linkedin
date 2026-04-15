@@ -1,0 +1,16 @@
+Double delete crash.
+I hit this bug in my first serious C++ project. The program would randomly crash on exit.
+I learned this the hard way. Now I either follow Rule of Five or Rule of Zero.
+
+Why does this matter?
+
+• Most C++ developers hit this bug at least once
+• Teaches Rule of Three/Five
+• Core memory management concept
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #cplusplus #memorysafety

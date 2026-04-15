@@ -1,0 +1,14 @@
+Memory leak with shared_ptr.
+
+Why does this matter?
+
+• Real-world smart pointer pattern
+• Common in graph/tree structures
+• Parent-child relationships
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #smartpointers #memoryleak

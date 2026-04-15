@@ -1,0 +1,17 @@
+Uncaught exception in a thread?
+Program calls std::terminate() and crashes immediately.
+No stack unwinding. No catching in main(). Just terminates.
+I learned this when debugging a multithreaded service at CitiusTech. Thread threw exception, whole program crashed.
+
+Why does this matter?
+
+• Common interview question at top companies
+• Critical multithreading knowledge
+• Exception safety is crucial in threaded code
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #multithreading #exceptions

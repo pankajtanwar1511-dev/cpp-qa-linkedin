@@ -1,0 +1,13 @@
+
+Why does this matter?
+
+• Teaches difference between static and dynamic binding
+• Common beginner mistake
+• Performance consideration (virtual has overhead)
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #polymorphism #virtualfunctions

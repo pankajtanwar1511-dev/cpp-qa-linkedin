@@ -1,0 +1,16 @@
+This one is mind-bending.
+Virtual function gets called from derived class (runtime).
+But default argument comes from base class (compile-time).
+
+Why does this matter?
+
+• Classic interview trap question
+• Tests deep understanding of compile-time vs runtime resolution
+• Can cause real-world bugs if you're not aware of this behavior
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #virtualfunctions #cplusplus

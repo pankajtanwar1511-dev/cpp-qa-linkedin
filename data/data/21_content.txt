@@ -1,0 +1,21 @@
+Exception thrown. But mutex still got unlocked.
+This is the power of RAII.
+I wrote a lock wrapper once for a critical section. Function acquired lock, did work, exception thrown.
+Without RAII, mutex would stay locked. Deadlock.
+But with RAII, destructor runs during stack unwinding. Mutex unlocks automatically. No deadlock.
+This is why std::lock_guard exists. It's basically this pattern.
+In my ROS 2 nodes, every critical section uses lock_guard. Even if exception happens, lock is released.
+RAII saves you from manual cleanup in exception paths.
+
+Why does this matter?
+
+• Perfect example of RAII in action
+• This is exactly why std::lock_guard exists
+• Exception safety is critical in multithreaded code
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #raii #exceptions

@@ -1,0 +1,20 @@
+This broke my brain when I first learned move semantics.
+An rvalue reference... is an lvalue.
+`int&& rref = 42;` creates an rvalue reference. But `rref` itself is an lvalue.
+You can take its address. It has a name. It's an lvalue.
+So when you pass `rref` to a function, it calls the lvalue overload, not rvalue.
+This is why std::move exists. To cast the lvalue back to an rvalue.
+Mind-bending. But once you understand this, move semantics clicks.
+
+Why does this matter?
+
+• Surprises most developers when they first learn it
+• Core concept for understanding move semantics correctly
+• Explains why std::forward is necessary
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #movesemantics #cplusplus

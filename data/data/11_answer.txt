@@ -1,0 +1,2 @@
+**Output:** Acquired, Caught (Memory leak occurs)
+Full explanation in the image below 👇

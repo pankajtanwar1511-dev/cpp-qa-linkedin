@@ -1,0 +1,17 @@
+Destroyed Singleton accessed from another Singleton's destructor.
+This is the static destruction order fiasco.
+Hardest to debug because it only happens during program shutdown.
+Logger destroyed first. Service destructor runs. Tries to log. Accesses destroyed Logger.
+
+Why does this matter?
+
+• Nightmare debugging scenario
+• Only appears during shutdown
+• Real-world gotcha
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #singleton #destructionorder

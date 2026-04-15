@@ -1,0 +1,16 @@
+Code compiles. Runs. But doesn't do what you expect.
+I wrote this during code review once. Thought I was being clever - passing objects by value.
+But when I passed a Derived object to a function taking Base by value, polymorphism stopped working.
+
+Why does this matter?
+
+• Common polymorphism bug for beginners
+• Causes subtle bugs in production - code compiles but doesn't behave as expected
+• Classic interview question at Amazon, Microsoft, Bloomberg
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #oop #cplusplus

@@ -1,0 +1,16 @@
+Constructor threw an exception. Destructor was never called.
+This caused a file handle leak in production at CitiusTech. We were working on PACS migration.
+Constructor opened a file, file didn't exist, threw exception. We expected destructor to close the handle. But destructor never ran.
+
+Why does this matter?
+
+• Common interview question at top companies
+• Critical RAII knowledge for C++ developers
+• Shows why exception safety in constructors is important
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #raii #exceptions

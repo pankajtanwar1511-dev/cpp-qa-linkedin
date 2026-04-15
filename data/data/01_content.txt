@@ -1,0 +1,16 @@
+Valgrind showed me memory leaks I was certain didn't exist.
+I'd tested the code. Everything worked. But every time I ran Valgrind, there were leaks.
+I learned this at Merkur Gaming when we were developing slot machine software. Valgrind caught what our tests missed.
+
+Why does this matter?
+
+• Common resource leak pattern in C++ code
+• Undefined behavior that can crash in production
+• Core C++ rule: always use virtual destructor for polymorphic base classes
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #cplusplus #programming

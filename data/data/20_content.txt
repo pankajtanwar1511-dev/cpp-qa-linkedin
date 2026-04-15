@@ -1,0 +1,16 @@
+Virtual functions work even when private.
+Most developers don't know this.
+I thought access specifiers would prevent virtual dispatch. They don't.
+
+Why does this matter?
+
+• Many developers don't know private virtuals work
+• Shows the clear separation between compile-time access control and runtime polymorphism
+• This is the basis of Template Method design pattern
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #virtualfunctions #designpatterns

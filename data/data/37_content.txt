@@ -1,0 +1,15 @@
+C++20 concepts changed template error messages forever.
+Before concepts, if you passed the wrong type to a template, you'd get 300 lines of compiler error.
+
+Why does this matter?
+
+• One of C++20's best features
+• Future direction of C++
+• Replaces complex SFINAE patterns
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #cpp20 #concepts

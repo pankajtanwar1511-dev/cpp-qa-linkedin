@@ -1,0 +1,15 @@
+Constructor throws. But members get destroyed.
+Container object doesn't exist = no destructor.
+
+Why does this matter?
+
+• Advanced RAII behavior that prevents resource leaks
+• C++ language guarantees that fully-constructed members get cleaned up
+• Tests deep understanding of construction/destruction order
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #raii #exceptions

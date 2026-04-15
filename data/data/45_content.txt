@@ -1,0 +1,16 @@
+Final question: Virtual inheritance.
+Solves the diamond problem. VBase shared between A and B.
+I use it rarely. Only when diamond problem is unavoidable.
+
+Why does this matter?
+
+• Advanced inheritance pattern
+• Diamond problem solution
+• Memory layout complexity
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #virtualinheritance #diamondproblem

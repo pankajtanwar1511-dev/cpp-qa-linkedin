@@ -1,0 +1,14 @@
+Lambda modified x. Or did it?
+
+Why does this matter?
+
+• Lambda capture mechanics
+• Common bug with threads
+• Modern C++ feature
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #lambda #cplusplus

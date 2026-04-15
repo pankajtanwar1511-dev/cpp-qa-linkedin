@@ -1,0 +1,16 @@
+Pure virtual = 0.
+But you can still provide implementation.
+I didn't know this for years. Thought pure virtual meant "no implementation."
+
+Why does this matter?
+
+• Advanced pattern that most developers don't know about
+• Useful when you want to force override but also provide optional default behavior
+• Used in STL and framework code
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #virtualfunctions #oop

@@ -1,0 +1,13 @@
+
+Why does this matter?
+
+• Surprising behavior that catches many off guard
+• C++14 feature that requires careful attention
+• Subtle type deduction issue
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #decltype #modernCpp

@@ -1,0 +1,18 @@
+Compilation error. And that's the point.
+This is intentional design to prevent object slicing.
+process() takes Base by value. Needs to copy Derived to Base.
+I've seen this pattern in frameworks to enforce correct usage.
+Is this a bug or a feature? 👇
+
+Why does this matter?
+
+• Intentional design pattern to prevent accidental slicing
+• Shows you can use access control for API design
+• Advanced C++ idiom used in production code
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #oop #copycontrol

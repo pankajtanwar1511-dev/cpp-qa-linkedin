@@ -1,0 +1,21 @@
+Modern C++ memory management.
+No manual delete. unique_ptr handles it.
+create() allocates, wraps in unique_ptr, returns.
+test() receives, uses, ends.
+unique_ptr destructor frees memory automatically.
+This is RAII for dynamic memory.
+I use this everywhere now. Replaced all raw new/delete with smart pointers.
+Even with exceptions, memory gets freed. Safe.
+
+Why does this matter?
+
+• Modern C++ best practice
+• Replaces raw new/delete
+• Exception safe
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #smartpointers #uniqueptr

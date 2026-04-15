@@ -1,0 +1,2 @@
+**Output:** Double delete / Crash at program exit
+Full explanation in the image below 👇

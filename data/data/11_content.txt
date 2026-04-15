@@ -1,0 +1,17 @@
+Never throw exceptions from destructors.
+I violated this rule once in exception handling code. Ironically.
+Destructor threw an exception during stack unwinding. Program called std::terminate() and crashed.
+I use noexcept on all destructors now. Makes the rule explicit.
+
+Why does this matter?
+
+• Core C++ rule
+• Program termination behavior
+• Exception safety fundamental
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #exceptions #raii

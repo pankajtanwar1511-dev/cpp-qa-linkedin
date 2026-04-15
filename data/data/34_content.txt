@@ -1,0 +1,14 @@
+Type traits pattern.
+
+Why does this matter?
+
+• Core STL technique
+• Type traits implementation
+• Template specialization mastery
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #templates #typetraits

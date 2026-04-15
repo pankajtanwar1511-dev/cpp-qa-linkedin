@@ -1,0 +1,15 @@
+Singleton pattern. Multiple threads. Race condition.
+I've seen this in production code where Singleton was initialized lazily without synchronization.
+
+Why does this matter?
+
+• Classic multithreading bug
+• Design pattern + concurrency
+• Real-world production issue
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #designpatterns #multithreading

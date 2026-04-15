@@ -1,0 +1,15 @@
+Substitution failure is not an error.
+This is SFINAE. One of C++'s most powerful (and confusing) template techniques.
+
+Why does this matter?
+
+• Pre-C++20 constraint technique
+• Foundational for concepts
+• STL uses this everywhere
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #templates #sfinae

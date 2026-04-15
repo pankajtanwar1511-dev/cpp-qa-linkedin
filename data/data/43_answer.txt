@@ -1,0 +1,2 @@
+**Output:** Undefined behavior: accessing destroyed Singleton during shutdown
+Full explanation in the image below 👇

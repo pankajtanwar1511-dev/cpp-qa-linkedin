@@ -9,8 +9,7 @@ logs/*.json
 
 # Data files (large PNG images and text content)
 # These are local content files, not committed to git
-data/data/*.png
-data/data/*.txt
+
 
 # Keep documentation files
 !data/*.md

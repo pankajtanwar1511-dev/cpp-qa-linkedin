@@ -1,0 +1,16 @@
+Detached thread accessing destroyed variable.
+This is one of the most dangerous multithreading bugs. Silent. Hard to reproduce. Crashes randomly.
+Local variable on stack. Thread captures it by reference. Thread detaches. Function returns. Variable destroyed.
+
+Why does this matter?
+
+• Production killer bug
+• Teaches thread lifetime
+• Real-world pattern
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #multithreading #threading

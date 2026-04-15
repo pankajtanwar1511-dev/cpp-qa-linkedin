@@ -1,0 +1,14 @@
+I use this in template code where different types need different handling.
+
+Why does this matter?
+
+• C++17 feature
+• Modern template technique
+• Cleaner than SFINAE
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #cpp17 #templates

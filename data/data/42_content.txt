@@ -1,0 +1,14 @@
+Stack overflow. Infinite recursion.
+
+Why does this matter?
+
+• Common CRTP pitfall that causes stack overflow
+• Advanced template technique used in performance-critical code
+• Real production bug pattern
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #crtp #templates

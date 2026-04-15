@@ -1,0 +1,14 @@
+Computation at compile time.
+
+Why does this matter?
+
+• Shows template power
+• Compile-time optimization
+• STL uses this heavily
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #templates #metaprogramming

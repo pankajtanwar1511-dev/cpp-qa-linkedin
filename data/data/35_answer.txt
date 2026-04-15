@@ -1,0 +1,2 @@
+**Output:** Program calls std::terminate()
+Full explanation in the image below 👇

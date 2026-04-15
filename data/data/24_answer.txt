@@ -1,0 +1,2 @@
+**Output:** Infinite recursion / Stack overflow
+Full explanation in the image below 👇

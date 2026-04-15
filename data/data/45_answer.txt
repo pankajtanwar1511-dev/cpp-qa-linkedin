@@ -1,0 +1,2 @@
+**Output:** 24-32 (platform dependent)
+Full explanation in the image below 👇

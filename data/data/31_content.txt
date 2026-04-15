@@ -1,0 +1,19 @@
+C++11 magic statics.
+Static local initialization is thread-safe automatically.
+No manual mutex. No double-checked locking. Compiler handles it.
+This is why Meyers Singleton works in modern C++.
+Before C++11, you needed complex locking. Now? Just works.
+I use this pattern for all singletons. Simple, thread-safe, guaranteed by language.
+
+Why does this matter?
+
+• Modern Singleton solution
+• C++11 language guarantee
+• No manual synchronization needed
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #singleton #cpp11

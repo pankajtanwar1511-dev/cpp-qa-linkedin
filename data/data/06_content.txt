@@ -1,0 +1,17 @@
+These two lines look almost identical:
+```cpp
+I still have to pause and think about this every time I use uniform initialization. It's confusing.
+I've seen bugs in production where someone used {} thinking they'd get the same result as (). They didn't.
+
+Why does this matter?
+
+• Very commonly misunderstood
+• Causes bugs in production code
+• Caveat of uniform initialization syntax
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #modernCpp #cplusplus

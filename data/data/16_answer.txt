@@ -1,0 +1,2 @@
+**Output:** R1 acquired, R2 acquired, Container constructed, R2 released, R1 released, Exception caught
+Full explanation in the image below 👇

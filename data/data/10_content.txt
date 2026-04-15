@@ -1,0 +1,16 @@
+Spent 30 minutes debugging this once.
+I thought `a` was a reference to `x`. Modified `a`, expected `x` to change. It didn't.
+I use auto a lot in my code now (modern C++ style), but I'm careful about references.
+
+Why does this matter?
+
+• Common auto pitfall
+• Real-world bug source
+• Teaches auto deduction rules
+
+What's the output here? 👇
+
+
+Comment your answer. I'll explain in comments later.
+
+#cpp #auto #modernCpp
