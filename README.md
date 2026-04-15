@@ -91,9 +91,10 @@ cpp-qa-linkedin/
 └── requirements.txt          # Python dependencies
 ```
 
-**Content files** (not in this repo):
-- Located in: `/home/pankaj/autolinkedin/linkedin_posts_qa/data/`
+**Content files** (gitignored - not committed):
+- Located in: `data/data/`
 - 4 files per post (45 posts = 180 files)
+- Excluded from git (large PNG/TXT files)
 
 ---
 
@@ -243,7 +244,7 @@ jobs:
 
 ## 📝 Content File Requirements
 
-Each Q&A post requires **4 files** in `/home/pankaj/autolinkedin/linkedin_posts_qa/data/`:
+Each Q&A post requires **4 files** in `data/data/`:
 
 | File | Purpose | Example |
 |------|---------|---------|
@@ -330,7 +331,7 @@ Tracks all posting events:
 **Solution:** Check `config/.env` credentials
 
 ### Issue: "Content file not found"
-**Solution:** Ensure files exist in `/home/pankaj/autolinkedin/linkedin_posts_qa/data/`
+**Solution:** Ensure files exist in `data/data/` directory
 
 ### Issue: "Failed to upload image"
 **Solution:**

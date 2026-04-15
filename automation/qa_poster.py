@@ -28,7 +28,7 @@ class CPPQAPoster:
         """Initialize Q&A poster."""
         # Paths
         self.app_dir = Path(__file__).parent.parent
-        self.qa_data_dir = Path("/home/pankaj/autolinkedin/linkedin_posts_qa/data")
+        self.qa_data_dir = self.app_dir / "data" / "data"
         self.tracker_file = self.app_dir / "tracker" / "qa_tracker.txt"
         self.pending_file = self.app_dir / "logs" / "pending_comments.json"
         self.history_file = self.app_dir / "logs" / "qa_history.json"

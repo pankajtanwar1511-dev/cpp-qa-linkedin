@@ -84,7 +84,7 @@ OR use auto mode:
 
 ========================================
 FILES REQUIRED FOR EACH POST:
-  Post N requires these 4 files in /home/pankaj/autolinkedin/linkedin_posts_qa/data/:
+  Post N requires these 4 files in data/data/:
   - NN_content.txt          (Question caption for main post)
   - NN_question_image.png   (Code screenshot/diagram)
   - NN_answer.txt           (Answer text for comment)

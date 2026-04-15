@@ -151,9 +151,9 @@ for line in tracker:
 
 ## Content Files Location
 
-**IMPORTANT:** Content files are NOT in this repository!
+**IMPORTANT:** Content files are IN this repository but GITIGNORED!
 
-**Location:** `/home/pankaj/autolinkedin/linkedin_posts_qa/data/`
+**Location:** `data/data/` (relative to repo root)
 
 **File Naming:**
 - `01_content.txt` - Question caption for Post 1
@@ -164,10 +164,11 @@ for line in tracker:
 
 **Total:** 180 files (45 posts × 4 files each)
 
-**Why Separate?**
-- Content files are large (PNG images)
-- Shared with main posting system
-- Reduces repository size
+**Git Strategy:**
+- Content files are GITIGNORED (large PNG/TXT files)
+- Not committed to repository
+- Stored locally in `data/data/` directory
+- Documentation files (`data/*.md`) ARE committed
 
 ## Posting Schedule
 
@@ -246,7 +247,7 @@ python3 automation/qa_poster.py --auto
 
 1. **Missing content files**
    - Error: `Content file not found`
-   - Fix: Check `/home/pankaj/autolinkedin/linkedin_posts_qa/data/`
+   - Fix: Check `data/data/` directory exists and contains files
 
 2. **API connection failed**
    - Error: `Connection failed: 401`
@@ -457,7 +458,7 @@ python3 automation/qa_poster.py --test-connection  # Test API
 
 **File Locations:**
 - Code: `~/cpp-qa-linkedin/`
-- Content: `/home/pankaj/autolinkedin/linkedin_posts_qa/data/`
+- Content: `~/cpp-qa-linkedin/data/data/`
 - Logs: `~/cpp-qa-linkedin/logs/`
 
 ---
