@@ -1,0 +1,63 @@
+name: Daily LinkedIn C++ Q&A Post
+
+on:
+  schedule:
+    # Post questions: Every day at 12:00 UTC (9:00 PM JST)
+    - cron: '0 12 * * *'
+    # Post answers: Every day at 13:00 UTC (10:00 PM JST, 1 hour later)
+    - cron: '0 13 * * *'
+
+  workflow_dispatch:  # Allows manual trigger from GitHub UI
+
+jobs:
+  post-qa-to-linkedin:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Fetch all history to track changes
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        pip install requests python-dotenv
+
+    - name: Post Q&A to LinkedIn
+      env:
+        LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+        LINKEDIN_USER_ID: ${{ secrets.LINKEDIN_USER_ID }}
+      run: |
+        cd automation
+        python3 qa_poster.py --auto
+
+    - name: Commit updated tracker and logs
+      if: success()
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "GitHub Actions Bot"
+        git add tracker/qa_tracker.txt logs/qa_history.json logs/pending_comments.json
+        git diff --staged --quiet || git commit -m "chore: Update Q&A tracker - Post completed via GitHub Actions"
+
+    - name: Pull and Push changes
+      if: success()
+      run: |
+        # Pull latest changes with rebase to avoid conflicts
+        git pull --rebase origin main || {
+          echo "Rebase conflict detected, aborting and retrying with merge"
+          git rebase --abort
+          git pull origin main
+        }
+        # Push the changes
+        git push origin main
+
+    - name: Notify on failure
+      if: failure()
+      run: |
+        echo "❌ LinkedIn Q&A posting failed!"
+        echo "Check logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
