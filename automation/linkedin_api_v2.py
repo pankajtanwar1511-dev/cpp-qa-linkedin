@@ -477,8 +477,10 @@ class LinkedInPoster:
                 'X-Restli-Protocol-Version': '2.0.0'
             }
 
-            # Replace {post_urn} in URL
-            comment_url = comment_url.replace('{post_urn}', post_urn)
+            # Replace {post_urn} in URL (URL-encode the URN)
+            from urllib.parse import quote
+            encoded_urn = quote(post_urn, safe='')
+            comment_url = comment_url.replace('{post_urn}', encoded_urn)
 
             response = requests.post(
                 comment_url,
