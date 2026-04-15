@@ -192,25 +192,55 @@ grep "^\[ \]" tracker/qa_tracker.txt | head -1
 
 ## 🤖 Automation Options
 
+### Important: App Does NOT Wait!
+
+**The app uses cron jobs, not continuous waiting:**
+- Posts question → Saves to JSON queue → **EXITS**
+- 1 hour later: Cron runs again → Posts answer → **EXITS**
+- State preserved in `logs/pending_comments.json`
+
 ### Option 1: Manual (Recommended for Testing)
 
 ```bash
-# Morning: Post question
+# Post question
 python3 automation/qa_poster.py --post-question
 
 # 1 hour later: Post answer
 python3 automation/qa_poster.py --post-answers
+
+# OR use auto mode (decides question vs answer automatically)
+python3 automation/qa_poster.py --auto
 ```
 
-### Option 2: Cron Job (Simple Automation)
+### Option 2: Cron Job (Recommended for Production)
 
+**Quick setup using provided script:**
+```bash
+bash cron-setup.sh
+```
+
+**Manual crontab setup:**
 ```bash
 # Edit crontab
 crontab -e
 
-# Add this line (runs twice daily):
-0 9 * * * cd ~/cpp-qa-linkedin && python3 automation/qa_poster.py --auto >> logs/cron.log 2>&1
-0 18 * * * cd ~/cpp-qa-linkedin && python3 automation/qa_poster.py --auto >> logs/cron.log 2>&1
+# Add these lines (9 PM and 10 PM JST = 12:00 and 13:00 UTC):
+0 12 * * * cd ~/cpp-qa-linkedin && python3 automation/qa_poster.py --auto >> logs/cron.log 2>&1
+0 13 * * * cd ~/cpp-qa-linkedin && python3 automation/qa_poster.py --auto >> logs/cron.log 2>&1
+```
+
+**How it works:**
+```
+9:00 PM JST - First cron job runs
+├─ No pending answers → Posts next question
+├─ Saves to pending queue (comment_at = 10 PM JST)
+└─ App exits ✅
+
+10:00 PM JST - Second cron job runs
+├─ Found pending answer (1 hour passed)
+├─ Posts answer comment
+├─ Removes from queue
+└─ App exits ✅
 ```
 
 ### Option 3: GitHub Actions (Advanced)
