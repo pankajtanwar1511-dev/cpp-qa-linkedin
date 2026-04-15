@@ -4,7 +4,7 @@ config/.env
 
 # Logs
 logs/*.log
-logs/*.json
+# logs/*.json
 *.log
 
 # Data files (large PNG images and text content)
