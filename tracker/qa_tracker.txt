@@ -22,7 +22,7 @@ NEXT TO POST: Post 1
 ========================================
 
 C++ Q&A POSTS (1-45)
-[ ] Post 1  | Virtual Destructor Memory Leak
+[Q] Post 1  | Virtual Destructor Memory Leak
 [ ] Post 2  | Range-Based For Loop on Temporary
 [ ] Post 3  | Dangling Reference Bug
 [ ] Post 4  | RAII File Handle Implementation
