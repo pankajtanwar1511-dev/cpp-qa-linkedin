@@ -4,8 +4,6 @@ on:
   schedule:
     # Post questions: Every day at 12:00 UTC (9:00 PM JST)
     - cron: '0 12 * * *'
-    # Post answers: Every day at 13:00 UTC (10:00 PM JST, 1 hour later)
-    - cron: '0 13 * * *'
 
   workflow_dispatch:  # Allows manual trigger from GitHub UI
 
@@ -28,21 +26,21 @@ jobs:
       run: |
         pip install requests python-dotenv
 
-    - name: Post Q&A to LinkedIn
+    - name: Post Q&A Question to LinkedIn
       env:
         LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
         LINKEDIN_USER_ID: ${{ secrets.LINKEDIN_USER_ID }}
       run: |
         cd automation
-        python3 qa_poster.py --auto
+        python3 qa_poster.py --post-question
 
     - name: Commit updated tracker and logs
       if: success()
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "GitHub Actions Bot"
-        git add tracker/qa_tracker.txt logs/qa_history.json logs/pending_comments.json
-        git diff --staged --quiet || git commit -m "chore: Update Q&A tracker - Post completed via GitHub Actions"
+        git add tracker/qa_tracker.txt logs/qa_history.json
+        git diff --staged --quiet || git commit -m "chore: Update Q&A tracker - Question posted via GitHub Actions"
 
     - name: Pull and Push changes
       if: success()

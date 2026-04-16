@@ -4,15 +4,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working in this
 
 ## Project Overview
 
-**LinkedIn C++ Q&A Auto Poster** - Automated posting system for interactive C++ question/answer content on LinkedIn. Posts engaging C++ challenges and automatically reveals answers 1 hour later as comments.
+**LinkedIn C++ Q&A Auto Poster** - Automated posting system for C++ question content on LinkedIn. Posts engaging C++ code challenges daily at 9 PM JST. Answers are added manually via LinkedIn UI.
 
 ## Repository Purpose
 
-This is a **separate automation system** from the main PDF carousel posting (autolinkedin). It handles interactive Q&A posts with a unique two-stage workflow:
+This is a **separate automation system** from the main PDF carousel posting (autolinkedin). It handles daily C++ Q&A question posts with a simple workflow:
 
-1. **Stage 1 (Question):** Post C++ code challenge with question image
-2. **Wait 1 Hour:** Allow audience engagement
-3. **Stage 2 (Answer):** Auto-comment with answer and explanation
+1. **Automated:** Post C++ code challenge with question image daily at 9 PM JST
+2. **Manual:** Add answer comment via LinkedIn UI whenever ready
+3. **Automated:** Tracker marks post as complete after question posting
 
 ## Repository Structure
 
@@ -28,7 +28,6 @@ cpp-qa-linkedin/
 │   └── qa_tracker.txt        # Progress tracking for 45 posts
 ├── logs/
 │   ├── qa_history.json       # Complete posting history
-│   ├── pending_comments.json # Queue of posts awaiting 1-hour answer
 │   └── qa_posting.log        # Debug/error logs
 ├── .gitignore
 ├── README.md                 # User-facing documentation
@@ -50,32 +49,23 @@ cpp-qa-linkedin/
 
 **Key Methods:**
 - `get_next_qa_post()` - Reads tracker, finds next `[ ]` post
-- `post_question()` - Stage 1: Posts question with image
-- `post_pending_answers()` - Stage 2: Posts answers after 1 hour
-- `save_pending_comment()` - Adds post to 1-hour queue
-- `mark_question_posted()` - Updates tracker: `[ ]` → `[Q]`
-- `mark_answer_posted()` - Updates tracker: `[Q]` → `[X]`
+- `post_question()` - Posts question with image, marks as `[X]` immediately
+- `mark_posted()` - Updates tracker: `[ ]` → `[X]`
 
 **Command Line Interface:**
 ```bash
 --test-connection      # Test LinkedIn API
---post-question        # Post next question (Stage 1)
---post-answers         # Post pending answers (Stage 2)
---auto                 # Auto-decide: question OR answers
+--post-question        # Post next question (marks as complete)
 --dry-run              # Test without posting
 ```
 
 **Workflow Logic:**
 ```python
-# Auto mode decision tree:
-1. Check pending_comments.json
-2. If any answers ready (1+ hours old):
-   → Post those answers
-   → Exit
-3. Else:
-   → Post next question
-   → Add to pending queue
-   → Exit
+# Simple workflow:
+1. Find next [ ] post in tracker
+2. Post question with image to LinkedIn
+3. Mark as [X] in tracker immediately
+4. Done! (Answer added manually via LinkedIn)
 ```
 
 ### 2. automation/linkedin_api_v2.py
@@ -107,14 +97,13 @@ cpp-qa-linkedin/
 **Format:**
 ```
 [ ] Post 1  | Virtual Destructor Memory Leak
-[Q] Post 2  | Range-Based For Loop on Temporary
+[ ] Post 2  | Range-Based For Loop on Temporary
 [X] Post 3  | Dangling Reference Bug
 ```
 
 **Status Symbols:**
 - `[ ]` - Not posted yet
-- `[Q]` - Question posted, waiting for answer
-- `[X]` - Complete (both question + answer posted)
+- `[X]` - Complete (question posted, answer added manually)
 
 **Next Post Logic:**
 ```python
@@ -123,31 +112,6 @@ for line in tracker:
     if line.startswith('[ ]'):
         return parse_post_number(line)
 ```
-
-### 4. logs/pending_comments.json
-
-**1-Hour Answer Queue**
-
-**Purpose:** Stores posts that need answers after 1 hour
-
-**Schema:**
-```json
-[
-  {
-    "post_num": 1,
-    "post_urn": "urn:li:share:7123456789",
-    "answer_path": "/path/to/01_answer.txt",
-    "answer_image_path": "/path/to/01_answer_image.png",
-    "posted_at": "2026-04-16T12:00:00+00:00",
-    "comment_at": "2026-04-16T13:00:00+00:00"
-  }
-]
-```
-
-**Cleanup Logic:**
-- Items removed after answer posted
-- Checked on every `--post-answers` run
-- Only posts comments if current_time >= comment_at
 
 ## Content Files Location
 
@@ -172,26 +136,30 @@ for line in tracker:
 
 ## Posting Schedule
 
-**Target:** 1 Q&A post per day at **9:00 PM JST**
+**Target:** Daily Q&A question posts (answers posted manually via LinkedIn UI)
+
+**Schedule:**
+- **9:00 PM JST (12:00 UTC)** - Post new questions automatically
+
+**Note:** Answers are posted manually via LinkedIn comments due to API limitations. LinkedIn's Community Management API (required for automated comments) is only available to approved business entities.
 
 **Implementation Options:**
 
 ### Option 1: Cron Job (Simple)
 ```bash
-# Run at 9 PM JST (12:00 UTC)
-0 12 * * * cd ~/cpp-qa-linkedin && python3 automation/qa_poster.py --auto
+# Post questions at 9 PM JST (12:00 UTC)
+0 12 * * * cd ~/cpp-qa-linkedin && python3 automation/qa_poster.py --post-question
 ```
 
-### Option 2: GitHub Actions (Advanced)
+### Option 2: GitHub Actions (Active)
 ```yaml
 schedule:
-  - cron: '0 12 * * *'  # 9 PM JST
+  - cron: '0 12 * * *'  # 9 PM JST - Questions
 ```
 
-**Auto Mode Strategy:**
-- Morning runs: Post answers (if any pending from yesterday)
-- Evening runs: Post next question
-- Naturally staggers question/answer by 1 day
+**Workflow:**
+- 9 PM JST: Automated question post
+- Manual: Add answer comment via LinkedIn UI (when ready)
 
 ## Workflow Examples
 
@@ -199,35 +167,30 @@ schedule:
 
 **Day 1 - 9:00 PM JST:**
 ```bash
-python3 automation/qa_poster.py --auto
-# → No pending answers
+python3 automation/qa_poster.py --post-question
 # → Posts Question 1
-# → Tracker: [ ] → [Q]
-# → Adds to pending_comments.json (comment_at = 10:00 PM JST)
+# → Tracker: [ ] → [X]
+# → Done!
 ```
 
-**Day 1 - 10:00 PM JST** (1 hour later):
-```bash
-python3 automation/qa_poster.py --auto
-# → Found pending answer for Post 1
-# → Posts Answer 1 as comment
-# → Tracker: [Q] → [X]
-# → Removes from pending_comments.json
-```
+**Day 1 - Manual (anytime):**
+- User manually adds answer comment via LinkedIn UI when ready
 
 **Day 2 - 9:00 PM JST:**
 ```bash
-python3 automation/qa_poster.py --auto
-# → No pending answers
+python3 automation/qa_poster.py --post-question
 # → Posts Question 2
-# → Tracker: [ ] → [Q]
-# → Adds to pending queue
+# → Tracker: [ ] → [X]
+# → Done!
 ```
 
 **Timeline:**
-- **Post 1:** Question on Day 1 @ 9 PM, Answer on Day 1 @ 10 PM
-- **Post 2:** Question on Day 2 @ 9 PM, Answer on Day 2 @ 10 PM
+- **Post 1:** Question automated @ 9 PM → Tracker marked [X] → Answer added manually later
+- **Post 2:** Question automated @ 9 PM → Tracker marked [X] → Answer added manually later
 - ... repeat for 45 days
+
+**Why Manual Answers?**
+Simplified workflow - User controls when to post answers. Tracker marks posts complete immediately after question posting.
 
 ## API Rate Limits
 
@@ -237,8 +200,7 @@ python3 automation/qa_poster.py --auto
 
 **This App Usage:**
 - Question post: 3 API calls (initialize, upload, post)
-- Answer comment: 3 API calls (initialize, upload, comment)
-- Total per Q&A: 6 API calls
+- Total per day: 3 API calls
 - Well within limits ✅
 
 ## Error Handling
@@ -274,7 +236,7 @@ python3 automation/qa_poster.py --auto
 | **Content** | PDF carousels | Q&A images |
 | **Format** | 10-15 slide PDFs | Single question/answer images |
 | **Posting** | 1-2 posts/day | 1 post/day |
-| **Schedule** | Morning + Evening | Evening only (9 PM JST) |
+| **Schedule** | Morning + Evening | 9 PM JST (questions only, answers manual) |
 | **Interaction** | Passive | Interactive (questions) |
 | **API** | Documents API | Images + Comments API |
 | **Repository** | autolinkedin | cpp-qa-linkedin |
@@ -320,18 +282,14 @@ python3 automation/qa_poster.py --post-question --dry-run
 # 3. Real question post (test with Post 1)
 python3 automation/qa_poster.py --post-question
 
-# 4. Check pending queue
-cat logs/pending_comments.json
-
-# 5. Wait 1 hour, then dry run answer
-python3 automation/qa_poster.py --post-answers --dry-run
-
-# 6. Real answer post
-python3 automation/qa_poster.py --post-answers
-
-# 7. Verify tracker updated
+# 4. Verify tracker updated
 grep "Post 1" tracker/qa_tracker.txt
 # Should show: [X] Post 1 | ...
+
+# 5. Manually add answer via LinkedIn UI
+# - Go to LinkedIn
+# - Find the post
+# - Add comment with answer
 ```
 
 ## Security Considerations
@@ -406,21 +364,8 @@ print(Counter(dates))
 # Check tracker format
 head -50 tracker/qa_tracker.txt
 
-# Ensure lines start with "[ ]", "[Q]", or "[X]"
+# Ensure lines start with "[ ]" or "[X]"
 # Ensure format: [X] Post N | Topic Title
-```
-
-### Issue: Answers not posting after 1 hour
-
-**Cause:** pending_comments.json timestamp issue
-
-**Fix:**
-```bash
-# Check pending queue
-cat logs/pending_comments.json | python3 -m json.tool
-
-# Verify comment_at timestamp is in past
-# If stuck, manually edit or delete pending item
 ```
 
 ### Issue: Duplicate posts
@@ -433,23 +378,20 @@ cat logs/pending_comments.json | python3 -m json.tool
 grep "Post N" tracker/qa_tracker.txt
 
 # Manually update if needed:
-# [ ] → [Q] after question posted
-# [Q] → [X] after answer posted
+# [ ] → [X] after question posted
 ```
 
 ## Quick Reference
 
 **Most Common Commands:**
 ```bash
-# Daily posting (9 PM JST)
+# Daily posting (automated at 9 PM JST)
 cd ~/cpp-qa-linkedin
-python3 automation/qa_poster.py --auto
+python3 automation/qa_poster.py --post-question
 
 # Check status
 grep "^\[ \]" tracker/qa_tracker.txt | head -1  # Next post
-grep "^\[Q\]" tracker/qa_tracker.txt | wc -l    # Awaiting answers
 grep "^\[X\]" tracker/qa_tracker.txt | wc -l    # Completed
-cat logs/pending_comments.json                   # Pending queue
 
 # Troubleshooting
 tail -50 logs/qa_posting.log                     # Recent logs

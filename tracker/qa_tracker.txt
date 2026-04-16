@@ -1,28 +1,25 @@
 # LinkedIn C++ Q&A Posting Tracker
-# Track progress for interactive Q&A posts
+# Track progress for Q&A posts
 #
 # STATUS LEGEND:
 #   [ ] TODO - Not posted yet
-#   [Q] QUESTION POSTED - Question posted, waiting for 1-hour answer
-#   [X] COMPLETE - Both question and answer posted
+#   [X] COMPLETE - Question posted (answer added manually)
 #
 # WORKFLOW:
-#   1. Post question (content.txt + question_image.png)
-#   2. Wait 1 hour
-#   3. Comment answer (answer.txt + answer_image.png)
+#   1. Post question (content.txt + question_image.png) - automated at 9 PM JST
+#   2. Add answer manually via LinkedIn UI whenever ready
 
 ========================================
 QUICK STATS:
   Total Q&A Posts: 45
-  Completed: 0
-  Question Posted (awaiting answer): 0
-  Remaining: 45
+  Completed: 1
+  Remaining: 44
 
-NEXT TO POST: Post 1
+NEXT TO POST: Post 2
 ========================================
 
 C++ Q&A POSTS (1-45)
-[Q] Post 1  | Virtual Destructor Memory Leak
+[X] Post 1  | Virtual Destructor Memory Leak
 [ ] Post 2  | Range-Based For Loop on Temporary
 [ ] Post 3  | Dangling Reference Bug
 [ ] Post 4  | RAII File Handle Implementation
@@ -70,37 +67,33 @@ C++ Q&A POSTS (1-45)
 
 ========================================
 HOW TO USE:
-1. Run: python3 automation/qa_poster.py --post-question
-   → Posts next [ ] question, marks as [Q]
+1. Automated: GitHub Actions posts question daily at 9 PM JST
+   python3 automation/qa_poster.py --post-question
+   → Posts next [ ] question, marks as [X] immediately
 
-2. Wait 1 hour (automated by pending_comments.json)
-
-3. Run: python3 automation/qa_poster.py --post-answers
-   → Posts pending answers, marks [Q] → [X]
-
-OR use auto mode:
-   python3 automation/qa_poster.py --auto
-   → Automatically posts question OR answers based on state
+2. Manual: Add answer comment via LinkedIn UI whenever ready
+   - Go to LinkedIn
+   - Find the post
+   - Add comment with answer
 
 ========================================
 FILES REQUIRED FOR EACH POST:
-  Post N requires these 4 files in data/data/:
+  Post N requires these files in data/data/:
   - NN_content.txt          (Question caption for main post)
   - NN_question_image.png   (Code screenshot/diagram)
-  - NN_answer.txt           (Answer text for comment)
-  - NN_answer_image.png     (Full explanation diagram)
+  - NN_answer.txt           (Answer text - for manual use)
+  - NN_answer_image.png     (Explanation - for manual use)
 
 Example for Post 1:
-  - 01_content.txt
-  - 01_question_image.png
-  - 01_answer.txt
-  - 01_answer_image.png
+  - 01_content.txt          (used by automation)
+  - 01_question_image.png   (used by automation)
+  - 01_answer.txt           (reference for manual comment)
+  - 01_answer_image.png     (reference for manual comment)
 
 ========================================
-POSTING SCHEDULE (RECOMMENDED):
-- Post 1 question per day
-- Answers post automatically after 1 hour
-- Allows audience engagement before revealing answer
-- Can run independently of main PDF posting system
+POSTING SCHEDULE:
+- Automated: 1 question per day at 9 PM JST (GitHub Actions)
+- Manual: Add answers via LinkedIn whenever ready
+- Runs independently of main PDF posting system
 
 ========================================
