@@ -47,9 +47,11 @@ Notice ~B is missing!
 
 Constructors run in order: A() then B()
 
-But only ~A() destructor is called. ~B() is skipped completely.
+But only ~A() destructor is called.
+~B() is skipped completely.
 
-This is undefined behavior. If B allocated memory, file handles, or any resources, they leak.
+This is undefined behavior.
+If B allocated memory, file handles, or any resources, they leak.
 
 **The fix:**
 
@@ -59,9 +61,12 @@ Make the base destructor virtual:
 
 Now both destructors get called in reverse order.
 
-**The rule:** If you use base class pointers to derived objects, ALWAYS make the base destructor virtual.
+**The rule:**
+If you use base class pointers to derived objects,
+ALWAYS make the base destructor virtual.
 
-I use this in all my ROS 2 nodes where I have base classes for different node types.
+I use this in all my ROS 2 nodes
+where I have base classes for different node types.
 
 ---
 
@@ -102,7 +107,8 @@ Double delete / Crash at program exit
 
 Default copy constructor does shallow copy.
 
-After `Widget w2 = w1`, both w1.data and w2.data point to the same memory.
+After `Widget w2 = w1`,
+both w1.data and w2.data point to the same memory.
 
 When scope ends:
 - w2 destroys first, deletes the memory
@@ -185,7 +191,8 @@ it = v.begin();  // Get fresh iterator
 std::cout << *it << "\n";
 ```
 
-In my autonomous driving work, we always reserve capacity for vectors in hot loops. Prevents both reallocation overhead and iterator invalidation bugs.
+In my autonomous driving work, we always reserve capacity for vectors in hot loops.
+Prevents both reallocation overhead and iterator invalidation bugs.
 
 ---
 
@@ -321,7 +328,8 @@ void func(A* a) {
 
 Now it prints "B" as expected.
 
-Common interview question. Tests if you understand when polymorphism works and when it doesn't.
+Common interview question. Tests if you understand when polymorphism works and when it
+doesn't.
 
 ---
 
@@ -827,7 +835,8 @@ For shared data between threads, I usually use:
 - std::mutex for synchronization
 - std::ref only when I'm sure about thread lifetime
 
-Passing by reference to threads is risky if the original goes out of scope while thread is running.
+Passing by reference to threads is risky if the original goes out of scope while thread is
+running.
 
 Common thread bug for beginners.
 
@@ -1124,7 +1133,8 @@ process(std::move(rref));  // Now calls rvalue overload
 
 **Why this design?**
 
-Safety. If rvalue references were rvalues, you could accidentally move from them multiple times:
+Safety. If rvalue references were rvalues, you could accidentally move from them multiple
+times:
 ```cpp
 int&& rref = 42;
 process(rref);  // Would move
@@ -2055,7 +2065,8 @@ Moved-from objects:
 
 **Why unspecified:**
 
-Implementations can optimize. As long as object is valid (can be destroyed), that's enough.
+Implementations can optimize. As long as object is valid (can be destroyed), that's
+enough.
 
 **My practice:**
 
@@ -2937,7 +2948,8 @@ Leaks memory, but guarantees always available.
 
 Avoid Singleton dependencies in destructors.
 
-If I must log during shutdown, use separate shutdown logging that doesn't depend on Singletons.
+If I must log during shutdown, use separate shutdown logging that doesn't depend on
+Singletons.
 
 **Nightmare to debug:**
 

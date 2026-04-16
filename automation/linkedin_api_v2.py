@@ -446,10 +446,15 @@ class LinkedInPoster:
                 if not image_urn:
                     self.logger.warning("Failed to upload comment image, posting text only")
 
-            # Use new Comments API
-            comment_url = "https://api.linkedin.com/rest/socialActions/{post_urn}/comments"
+            # Use older Comments API (v2 endpoint - more compatible)
+            # New API: /rest/socialActions/{urn}/comments
+            # Old API: /v2/socialActions/{encoded_urn}/comments
+            # URN must be URL-encoded for v2 API
+            from urllib.parse import quote
+            encoded_urn = quote(post_urn, safe='')
+            comment_url = f"https://api.linkedin.com/v2/socialActions/{encoded_urn}/comments"
 
-            # Build comment payload
+            # Build comment payload (v2 API structure)
             comment_payload = {
                 "actor": self.user_id,
                 "message": {
@@ -457,13 +462,15 @@ class LinkedInPoster:
                 }
             }
 
-            # Add image to comment if uploaded
+            # v2 API uses different structure for comment images
+            # Note: v2 socialActions API may not support images in comments
+            # We'll add the image URN in a supported format if available
             if image_urn:
-                comment_payload["content"] = {
-                    "media": {
-                        "id": image_urn
-                    }
-                }
+                # Try alternate v2 structure for media
+                comment_payload["content"] = [{
+                    "type": "IMAGE",
+                    "entity": image_urn
+                }]
 
             # LinkedIn API version
             from datetime import datetime, timedelta
@@ -473,14 +480,9 @@ class LinkedInPoster:
             comment_headers = {
                 'Authorization': f'Bearer {self.access_token}',
                 'Content-Type': 'application/json',
-                'Linkedin-Version': linkedin_version,
                 'X-Restli-Protocol-Version': '2.0.0'
             }
-
-            # Replace {post_urn} in URL (URL-encode the URN)
-            from urllib.parse import quote
-            encoded_urn = quote(post_urn, safe='')
-            comment_url = comment_url.replace('{post_urn}', encoded_urn)
+            # Note: v2 API doesn't use Linkedin-Version header
 
             response = requests.post(
                 comment_url,

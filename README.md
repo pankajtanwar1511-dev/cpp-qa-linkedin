@@ -8,37 +8,40 @@ Post engaging C++ questions with automatic answer reveals after 1 hour.
 
 ## 📋 Overview
 
-This app automates posting **45 C++ Q&A posts** to LinkedIn with a unique two-stage workflow:
+This app automates posting **45 C++ Q&A questions** to LinkedIn daily:
 
-1. **Post Question** - Share code challenge with question image
-2. **Wait 1 Hour** - Let audience engage and comment
-3. **Post Answer** - Auto-comment with answer and explanation image
+1. **Post Question** (Automated) - Share code challenge with question image at 9 PM JST
+2. **Post Answer** (Manual) - Add answer comment via LinkedIn UI when ready
 
-**Status:** Ready to use ✅
+**Status:** Questions automated ✅ | Answers manual (API limitation)
 
 ---
 
 ## 🎯 How It Works
 
-### Two-Stage Posting Workflow
+### Simplified Posting Workflow
 
 ```
-Stage 1: POST QUESTION
+Stage 1: POST QUESTION (AUTOMATED)
 ┌─────────────────────────────┐
 │ Post: XX_content.txt        │
 │ Image: XX_question_image.png│
 │ Status: [ ] → [Q]           │
+│ Time: 9:00 PM JST daily     │
 └─────────────────────────────┘
            ↓
-       Wait 1 hour
-           ↓
-Stage 2: POST ANSWER
+Stage 2: POST ANSWER (MANUAL)
 ┌─────────────────────────────┐
-│ Comment: XX_answer.txt      │
-│ Image: XX_answer_image.png  │
+│ Comment via LinkedIn UI     │
+│ Copy: XX_answer.txt         │
+│ Attach: XX_answer_image.png │
 │ Status: [Q] → [X]           │
+│ Time: Your choice           │
 └─────────────────────────────┘
 ```
+
+**Why Manual Answers?**
+LinkedIn's Community Management API (required for automated comments) is only available to approved business entities, not individual developers.
 
 ### Example Post
 
@@ -192,12 +195,12 @@ grep "^\[ \]" tracker/qa_tracker.txt | head -1
 
 ## 🤖 Automation Options
 
-### Important: App Does NOT Wait!
+### Important: Questions Only - Answers Manual!
 
-**The app uses cron jobs, not continuous waiting:**
-- Posts question → Saves to JSON queue → **EXITS**
-- 1 hour later: Cron runs again → Posts answer → **EXITS**
-- State preserved in `logs/pending_comments.json`
+**The app automates question posting only:**
+- Posts question at 9 PM JST → Updates tracker → **EXITS**
+- Answers must be posted manually via LinkedIn UI (API limitation)
+- Tracker shows [Q] status until you manually add answer and mark [X]
 
 ### Option 1: Manual (Recommended for Testing)
 
@@ -224,23 +227,21 @@ bash cron-setup.sh
 # Edit crontab
 crontab -e
 
-# Add these lines (9 PM and 10 PM JST = 12:00 and 13:00 UTC):
-0 12 * * * cd ~/cpp-qa-linkedin && python3 automation/qa_poster.py --auto >> logs/cron.log 2>&1
-0 13 * * * cd ~/cpp-qa-linkedin && python3 automation/qa_poster.py --auto >> logs/cron.log 2>&1
+# Add this line (9 PM JST = 12:00 UTC):
+0 12 * * * cd ~/cpp-qa-linkedin && python3 automation/qa_poster.py --post-question >> logs/cron.log 2>&1
 ```
 
 **How it works:**
 ```
-9:00 PM JST - First cron job runs
-├─ No pending answers → Posts next question
-├─ Saves to pending queue (comment_at = 10 PM JST)
+9:00 PM JST - Cron job runs
+├─ Posts next question automatically
+├─ Updates tracker: [ ] → [Q]
 └─ App exits ✅
 
-10:00 PM JST - Second cron job runs
-├─ Found pending answer (1 hour passed)
-├─ Posts answer comment
-├─ Removes from queue
-└─ App exits ✅
+Manual (your choice) - Add answer via LinkedIn:
+├─ Go to LinkedIn post
+├─ Add comment with answer text + image
+└─ Update tracker: [Q] → [X] (optional)
 ```
 
 ### Option 3: GitHub Actions (Advanced)
@@ -248,27 +249,29 @@ crontab -e
 Create `.github/workflows/post-qa.yml`:
 
 ```yaml
-name: Post C++ Q&A
+name: Post C++ Q&A Questions
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Daily at midnight UTC
+    - cron: '0 12 * * *'  # Daily at 9 PM JST (12:00 UTC)
   workflow_dispatch:
 
 jobs:
   post:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'
       - run: pip install -r requirements.txt
-      - run: python3 automation/qa_poster.py --auto
+      - run: python3 automation/qa_poster.py --post-question
         env:
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
           LINKEDIN_USER_ID: ${{ secrets.LINKEDIN_USER_ID }}
 ```
+
+**Note:** This workflow file already exists at `.github/workflows/post-qa.yml` and is active.
 
 ---
 

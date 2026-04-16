@@ -8,9 +8,11 @@ echo "=========================================="
 echo "LinkedIn C++ Q&A Auto Poster - Cron Setup"
 echo "=========================================="
 echo ""
-echo "This will add two cron jobs:"
-echo "  1. Post questions at 9:00 PM JST (12:00 UTC)"
-echo "  2. Post answers at 10:00 PM JST (13:00 UTC)"
+echo "This will add one cron job:"
+echo "  • Post questions at 9:00 PM JST (12:00 UTC)"
+echo ""
+echo "Note: Answers must be posted manually via LinkedIn UI"
+echo "      (LinkedIn Community Management API not available for individuals)"
 echo ""
 echo "Approach: Using --auto mode (smart decision logic)"
 echo ""
@@ -18,10 +20,9 @@ echo ""
 # Get current crontab
 CURRENT_CRON=$(crontab -l 2>/dev/null)
 
-# Define new cron jobs
+# Define new cron job
 APP_DIR="$HOME/cpp-qa-linkedin"
-CRON_JOB_QUESTION="0 12 * * * cd $APP_DIR && python3 automation/qa_poster.py --auto >> logs/cron.log 2>&1"
-CRON_JOB_ANSWER="0 13 * * * cd $APP_DIR && python3 automation/qa_poster.py --auto >> logs/cron.log 2>&1"
+CRON_JOB_QUESTION="0 12 * * * cd $APP_DIR && python3 automation/qa_poster.py --post-question >> logs/cron.log 2>&1"
 
 # Check if jobs already exist
 if echo "$CURRENT_CRON" | grep -q "cpp-qa-linkedin"; then
@@ -40,20 +41,20 @@ if echo "$CURRENT_CRON" | grep -q "cpp-qa-linkedin"; then
     CURRENT_CRON=$(echo "$CURRENT_CRON" | grep -v "cpp-qa-linkedin")
 fi
 
-# Add new jobs
+# Add new job
 NEW_CRON="$CURRENT_CRON
-# LinkedIn C++ Q&A Auto Poster
-$CRON_JOB_QUESTION
-$CRON_JOB_ANSWER"
+# LinkedIn C++ Q&A Auto Poster (Questions Only)
+$CRON_JOB_QUESTION"
 
 # Install new crontab
 echo "$NEW_CRON" | crontab -
 
-echo "✅ Cron jobs installed successfully!"
+echo "✅ Cron job installed successfully!"
 echo ""
-echo "Scheduled jobs:"
-echo "  📅 9:00 PM JST (12:00 UTC) - Post questions"
-echo "  💬 10:00 PM JST (13:00 UTC) - Post answers"
+echo "Scheduled job:"
+echo "  📅 9:00 PM JST (12:00 UTC) - Post questions (automated)"
+echo ""
+echo "Remember: Post answers manually via LinkedIn UI"
 echo ""
 echo "Verify with: crontab -l"
 echo "Check logs at: $APP_DIR/logs/cron.log"

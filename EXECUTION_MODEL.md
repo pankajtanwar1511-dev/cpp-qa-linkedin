@@ -40,7 +40,7 @@ The LinkedIn C++ Q&A Auto Poster uses a **stateless cron job approach** rather t
     "answer_path": "/home/pankaj/cpp-qa-linkedin/data/data/01_answer.txt",
     "answer_image_path": "/home/pankaj/cpp-qa-linkedin/data/data/01_answer_image.png",
     "posted_at": "2026-04-16T12:00:00+00:00",
-    "comment_at": "2026-04-16T13:00:00+00:00"
+    "comment_at": "2026-04-17T11:00:00+00:00"
   }
 ]
 ```
@@ -125,14 +125,14 @@ The LinkedIn C++ Q&A Auto Poster uses a **stateless cron job approach** rather t
 
 ---
 
-### Day 1 - Answer Posting (1 Hour Later)
+### Day 2 - Answer Posting (~23 Hours Later)
 
-**Time:** 10:00 PM JST (13:00 UTC)
-**Cron:** `0 13 * * * ... --auto`
+**Time:** 8:00 PM JST (11:00 UTC)
+**Cron:** `0 11 * * * ... --auto`
 
 ```
 ┌─────────────────────────────────────────┐
-│ CRON TRIGGERS: 10:00 PM JST             │
+│ CRON TRIGGERS: 8:00 PM JST              │
 └─────────────────────────────────────────┘
               ↓
 ┌─────────────────────────────────────────┐
@@ -146,9 +146,9 @@ The LinkedIn C++ Q&A Auto Poster uses a **stateless cron job approach** rather t
               ↓
 ┌─────────────────────────────────────────┐
 │ 3. Check timestamp:                     │
-│    current_time: 13:00:00 UTC           │
-│    comment_at:   13:00:00 UTC           │
-│    → READY! (13:00 >= 13:00) ✅         │
+│    current_time: 11:00:00 UTC (Day 2)   │
+│    comment_at:   11:00:00 UTC (Day 2)   │
+│    → READY! (11:00 >= 11:00) ✅         │
 └─────────────────────────────────────────┘
               ↓
 ┌─────────────────────────────────────────┐
@@ -193,7 +193,7 @@ The LinkedIn C++ Q&A Auto Poster uses a **stateless cron job approach** rather t
 
 ---
 
-### Day 2 - Next Question
+### Day 2 - Next Question (After Answer)
 
 **Time:** 9:00 PM JST (12:00 UTC)
 **Cron:** `0 12 * * * ... --auto`
@@ -201,6 +201,7 @@ The LinkedIn C++ Q&A Auto Poster uses a **stateless cron job approach** rather t
 Same flow as Day 1, but:
 - Finds `[ ] Post 2` in tracker
 - Posts Question 2
+- Saves to pending queue (comment_at = Day 3, 8 PM JST)
 - Cycles continue for 45 days
 
 ---
@@ -211,17 +212,19 @@ Same flow as Day 1, but:
 Day 1:
 09:00 PM JST ┃ CRON → Post Question 1 → Save to pending queue → EXIT
              ┃ tracker: [ ] Post 1 → [Q] Post 1
-             ┃ pending_comments.json: [Post 1 URN + comment_at: 10 PM]
+             ┃ pending_comments.json: [Post 1 URN + comment_at: Day 2, 8 PM]
              ┃
-10:00 PM JST ┃ CRON → Check pending → Found Post 1 (ready) → Comment → EXIT
+Day 2:
+08:00 PM JST ┃ CRON → Check pending → Found Post 1 (ready) → Comment → EXIT
              ┃ tracker: [Q] Post 1 → [X] Post 1
              ┃ pending_comments.json: []
              ┃
-Day 2:
 09:00 PM JST ┃ CRON → Post Question 2 → Save to pending queue → EXIT
              ┃ tracker: [ ] Post 2 → [Q] Post 2
+             ┃ pending_comments.json: [Post 2 URN + comment_at: Day 3, 8 PM]
              ┃
-10:00 PM JST ┃ CRON → Check pending → Found Post 2 (ready) → Comment → EXIT
+Day 3:
+08:00 PM JST ┃ CRON → Check pending → Found Post 2 (ready) → Comment → EXIT
              ┃ tracker: [Q] Post 2 → [X] Post 2
              ┃
 ...repeat for 45 days
@@ -249,12 +252,12 @@ post_answer()
 ```python
 # What we actually do:
 
-# Run 1 (9 PM):
+# Run 1 (9 PM Day 1):
 post_question()
-save_to_json(post_urn, comment_at="10 PM")
+save_to_json(post_urn, comment_at="8 PM Day 2")
 exit(0)  # App ends
 
-# Run 2 (10 PM - separate cron job):
+# Run 2 (8 PM Day 2 - separate cron job):
 pending = load_from_json()
 if current_time >= pending['comment_at']:
     post_answer(pending['post_urn'])
@@ -293,8 +296,8 @@ def auto_mode():
 ```
 
 **This is why auto mode works:**
+- 8 PM run: Pending found → Posts answer (doesn't post new question)
 - 9 PM run: No pending → Posts question
-- 10 PM run: Pending found → Posts answer (doesn't post new question)
 
 ---
 
@@ -305,9 +308,9 @@ def auto_mode():
 ```bash
 # Add to crontab (run: crontab -e)
 
-# Post questions and answers (9 PM and 10 PM JST = 12:00 and 13:00 UTC)
+# Post answers and questions (8 PM and 9 PM JST = 11:00 and 12:00 UTC)
+0 11 * * * cd ~/cpp-qa-linkedin && python3 automation/qa_poster.py --auto >> logs/cron.log 2>&1
 0 12 * * * cd ~/cpp-qa-linkedin && python3 automation/qa_poster.py --auto >> logs/cron.log 2>&1
-0 13 * * * cd ~/cpp-qa-linkedin && python3 automation/qa_poster.py --auto >> logs/cron.log 2>&1
 ```
 
 ### Quick Setup Script
@@ -404,12 +407,12 @@ sed -i 's/\[ \] Post N /\[Q\] Post N /' tracker/qa_tracker.txt
 1. **App does NOT wait** - Uses cron jobs for timing
 2. **State in JSON files** - Survives app restarts
 3. **post_urn is the key** - LinkedIn's unique post ID links question to answer
-4. **Two cron jobs** - One at 9 PM (question), one at 10 PM (answer)
+4. **Two cron jobs** - One at 8 PM (answers), one at 9 PM (questions)
 5. **Auto mode** - Smart decision: answer if pending, else question
 
-**The "1-hour delay" is actually:**
-- Save timestamp in JSON: `comment_at = now + 1 hour`
-- Cron runs 1 hour later
+**The "delay" is actually:**
+- Save timestamp in JSON: `comment_at = next day 8 PM JST`
+- Cron runs next day at 8 PM
 - Check: `current_time >= comment_at`
 - Post answer if ready
 
