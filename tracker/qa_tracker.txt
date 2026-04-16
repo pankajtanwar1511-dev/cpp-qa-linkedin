@@ -20,7 +20,7 @@ NEXT TO POST: Post 2
 
 C++ Q&A POSTS (1-45)
 [X] Post 1  | Virtual Destructor Memory Leak
-[ ] Post 2  | Range-Based For Loop on Temporary
+[X] Post 2  | Range-Based For Loop on Temporary
 [ ] Post 3  | Dangling Reference Bug
 [ ] Post 4  | RAII File Handle Implementation
 [ ] Post 5  | Move Semantics Performance
