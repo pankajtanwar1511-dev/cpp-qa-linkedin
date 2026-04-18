@@ -98,5 +98,15 @@
     "success": true,
     "error": null,
     "post_urn": "urn:li:share:7450889100397686784"
+  },
+  {
+    "timestamp": "2026-04-18T12:35:28.418468+00:00",
+    "calendar_date_jst": "2026-04-18",
+    "post_number": 4,
+    "topic": "RAII File Handle Implementation",
+    "event_type": "question_posted",
+    "success": true,
+    "error": null,
+    "post_urn": "urn:li:share:7451247024714186752"
   }
 ]

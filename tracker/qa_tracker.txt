@@ -22,7 +22,7 @@ C++ Q&A POSTS (1-45)
 [X] Post 1  | Virtual Destructor Memory Leak
 [X] Post 2  | Range-Based For Loop on Temporary
 [X] Post 3  | Dangling Reference Bug
-[ ] Post 4  | RAII File Handle Implementation
+[X] Post 4  | RAII File Handle Implementation
 [ ] Post 5  | Move Semantics Performance
 [ ] Post 6  | Smart Pointer Cycle Detection
 [ ] Post 7  | Template Specialization Ambiguity
