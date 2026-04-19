@@ -23,7 +23,7 @@ C++ Q&A POSTS (1-45)
 [X] Post 2  | Range-Based For Loop on Temporary
 [X] Post 3  | Dangling Reference Bug
 [X] Post 4  | RAII File Handle Implementation
-[ ] Post 5  | Move Semantics Performance
+[X] Post 5  | Move Semantics Performance
 [ ] Post 6  | Smart Pointer Cycle Detection
 [ ] Post 7  | Template Specialization Ambiguity
 [ ] Post 8  | Perfect Forwarding with Universal References
