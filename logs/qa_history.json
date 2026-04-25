@@ -168,5 +168,15 @@
     "success": true,
     "error": null,
     "post_urn": "urn:li:share:7453426456115974144"
+  },
+  {
+    "timestamp": "2026-04-25T12:36:41.205285+00:00",
+    "calendar_date_jst": "2026-04-25",
+    "post_number": 11,
+    "topic": "Pointer vs Reference for Optional Parameters",
+    "event_type": "question_posted",
+    "success": true,
+    "error": null,
+    "post_urn": "urn:li:share:7453784044992897025"
   }
 ]
