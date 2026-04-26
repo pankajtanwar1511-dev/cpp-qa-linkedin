@@ -178,5 +178,15 @@
     "success": true,
     "error": null,
     "post_urn": "urn:li:share:7453784044992897025"
+  },
+  {
+    "timestamp": "2026-04-26T12:38:42.828760+00:00",
+    "calendar_date_jst": "2026-04-26",
+    "post_number": 12,
+    "topic": "Virtual Function in Constructor",
+    "event_type": "question_posted",
+    "success": true,
+    "error": null,
+    "post_urn": "urn:li:share:7454146943032922112"
   }
 ]

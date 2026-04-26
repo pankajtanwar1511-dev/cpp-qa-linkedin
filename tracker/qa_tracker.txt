@@ -30,7 +30,7 @@ C++ Q&A POSTS (1-45)
 [X] Post 9  | Copy Elision and RVO
 [X] Post 10 | Const Correctness Violation
 [X] Post 11 | Pointer vs Reference for Optional Parameters
-[ ] Post 12 | Virtual Function in Constructor
+[X] Post 12 | Virtual Function in Constructor
 [ ] Post 13 | Multiple Inheritance Diamond Problem
 [ ] Post 14 | Static Initialization Order Fiasco
 [ ] Post 15 | Exception Safety Guarantees
