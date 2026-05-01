@@ -35,7 +35,7 @@ C++ Q&A POSTS (1-45)
 [X] Post 14 | Static Initialization Order Fiasco
 [X] Post 15 | Exception Safety Guarantees
 [X] Post 16 | Thread-Safe Singleton Pattern
-[ ] Post 17 | Lock-Free Programming Pitfall
+[X] Post 17 | Lock-Free Programming Pitfall
 [ ] Post 18 | Memory Ordering and Atomics
 [ ] Post 19 | Custom Allocator Design
 [ ] Post 20 | STL Iterator Invalidation
