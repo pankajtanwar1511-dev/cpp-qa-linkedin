@@ -37,7 +37,7 @@ C++ Q&A POSTS (1-45)
 [X] Post 16 | Thread-Safe Singleton Pattern
 [X] Post 17 | Lock-Free Programming Pitfall
 [X] Post 18 | Memory Ordering and Atomics
-[ ] Post 19 | Custom Allocator Design
+[X] Post 19 | Custom Allocator Design
 [ ] Post 20 | STL Iterator Invalidation
 [ ] Post 21 | Lambda Capture by Reference Danger
 [ ] Post 22 | Type Deduction with auto
