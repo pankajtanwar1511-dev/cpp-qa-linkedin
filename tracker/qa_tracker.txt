@@ -40,7 +40,7 @@ C++ Q&A POSTS (1-45)
 [X] Post 19 | Custom Allocator Design
 [X] Post 20 | STL Iterator Invalidation
 [X] Post 21 | Lambda Capture by Reference Danger
-[ ] Post 22 | Type Deduction with auto
+[X] Post 22 | Type Deduction with auto
 [ ] Post 23 | SFINAE and enable_if Usage
 [ ] Post 24 | Variadic Template Expansion
 [ ] Post 25 | Concept Requirements (C++20)
