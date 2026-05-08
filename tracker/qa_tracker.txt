@@ -42,7 +42,7 @@ C++ Q&A POSTS (1-45)
 [X] Post 21 | Lambda Capture by Reference Danger
 [X] Post 22 | Type Deduction with auto
 [X] Post 23 | SFINAE and enable_if Usage
-[ ] Post 24 | Variadic Template Expansion
+[X] Post 24 | Variadic Template Expansion
 [ ] Post 25 | Concept Requirements (C++20)
 [ ] Post 26 | Coroutine Lifetime Management
 [ ] Post 27 | std::optional Misuse

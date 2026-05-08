@@ -298,5 +298,15 @@
     "success": true,
     "error": null,
     "post_urn": "urn:li:share:7458144901189492737"
+  },
+  {
+    "timestamp": "2026-05-08T13:04:55.867398+00:00",
+    "calendar_date_jst": "2026-05-08",
+    "post_number": 24,
+    "topic": "Variadic Template Expansion",
+    "event_type": "question_posted",
+    "success": true,
+    "error": null,
+    "post_urn": "urn:li:share:7458502195219554304"
   }
 ]
