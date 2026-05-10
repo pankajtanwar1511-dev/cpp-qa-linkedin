@@ -44,7 +44,7 @@ C++ Q&A POSTS (1-45)
 [X] Post 23 | SFINAE and enable_if Usage
 [X] Post 24 | Variadic Template Expansion
 [X] Post 25 | Concept Requirements (C++20)
-[ ] Post 26 | Coroutine Lifetime Management
+[X] Post 26 | Coroutine Lifetime Management
 [ ] Post 27 | std::optional Misuse
 [ ] Post 28 | std::variant Type Safety
 [ ] Post 29 | std::span Boundary Checking
