@@ -328,5 +328,15 @@
     "success": true,
     "error": null,
     "post_urn": "urn:li:share:7459223469738835969"
+  },
+  {
+    "timestamp": "2026-05-12T13:49:31.603356+00:00",
+    "calendar_date_jst": "2026-05-12",
+    "post_number": 27,
+    "topic": "std::optional Misuse",
+    "event_type": "question_posted",
+    "success": true,
+    "error": null,
+    "post_urn": "urn:li:share:7459962969376837632"
   }
 ]
