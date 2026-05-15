@@ -358,5 +358,15 @@
     "success": true,
     "error": null,
     "post_urn": "urn:li:share:7460681768489111552"
+  },
+  {
+    "timestamp": "2026-05-15T13:25:13.731103+00:00",
+    "calendar_date_jst": "2026-05-15",
+    "post_number": 30,
+    "topic": "Structured Bindings Edge Case",
+    "event_type": "question_posted",
+    "success": true,
+    "error": null,
+    "post_urn": "urn:li:share:7461044018332745728"
   }
 ]

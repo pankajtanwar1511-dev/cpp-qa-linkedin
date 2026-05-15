@@ -48,7 +48,7 @@ C++ Q&A POSTS (1-45)
 [X] Post 27 | std::optional Misuse
 [X] Post 28 | std::variant Type Safety
 [X] Post 29 | std::span Boundary Checking
-[ ] Post 30 | Structured Bindings Edge Case
+[X] Post 30 | Structured Bindings Edge Case
 [ ] Post 31 | constexpr Function Limitation
 [ ] Post 32 | Class Template Argument Deduction
 [ ] Post 33 | Fold Expressions Gotcha
