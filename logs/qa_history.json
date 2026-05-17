@@ -378,5 +378,15 @@
     "success": true,
     "error": null,
     "post_urn": "urn:li:share:7461398694001741824"
+  },
+  {
+    "timestamp": "2026-05-17T12:52:08.219798+00:00",
+    "calendar_date_jst": "2026-05-17",
+    "post_number": 32,
+    "topic": "Class Template Argument Deduction",
+    "event_type": "question_posted",
+    "success": true,
+    "error": null,
+    "post_urn": "urn:li:share:7461760466189713408"
   }
 ]
