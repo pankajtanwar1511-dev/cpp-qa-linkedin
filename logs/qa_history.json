@@ -388,5 +388,15 @@
     "success": true,
     "error": null,
     "post_urn": "urn:li:share:7461760466189713408"
+  },
+  {
+    "timestamp": "2026-05-18T14:50:51.714704+00:00",
+    "calendar_date_jst": "2026-05-18",
+    "post_number": 33,
+    "topic": "Fold Expressions Gotcha",
+    "event_type": "question_posted",
+    "success": true,
+    "error": null,
+    "post_urn": "urn:li:share:7462152731932323840"
   }
 ]
