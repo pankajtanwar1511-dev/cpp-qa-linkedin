@@ -53,7 +53,7 @@ C++ Q&A POSTS (1-45)
 [X] Post 32 | Class Template Argument Deduction
 [X] Post 33 | Fold Expressions Gotcha
 [X] Post 34 | Three-Way Comparison Operator
-[ ] Post 35 | Module Linkage Issue
+[X] Post 35 | Module Linkage Issue
 [ ] Post 36 | Designated Initializers Order
 [ ] Post 37 | Aggregate Initialization Rules
 [ ] Post 38 | std::array vs C Array Performance
